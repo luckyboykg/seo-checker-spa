@@ -13,7 +13,7 @@ UI Framework: Bootstrap 5.
 Form Component: Reactive Forms
 Unit test: Jasmine.
 
-![image](https://github.com/user-attachments/assets/732a6b0a-fb41-4134-ad3e-ee7085b02c95)
+![image](https://github.com/user-attachments/assets/f0b0c674-70e1-4022-b130-84e1a76c5e61)
 
 **Questions?**
 
