@@ -1,0 +1,92 @@
+<div class="container">
+  <div class="btn-group" btnRadioGroup [(ngModel)]="radio">
+    <label
+      class="btn btn-primary"
+      [btnRadio]="searchProvider.google"
+      role="button"
+      >Google</label
+    >
+    <label
+      class="btn btn-primary"
+      [btnRadio]="searchProvider.bing"
+      role="button"
+      >Bing</label
+    >
+    <label
+      class="btn btn-primary"
+      [btnRadio]="searchProvider.both"
+      role="button"
+      >Both</label
+    >
+  </div>
+
+  <form (ngSubmit)="onSubmit()" novalidate [formGroup]="seoForm">
+    <div class="form-group">
+      <label>URL</label>
+      <input type="text" class="form-control" [formControl]="urlControl" />
+
+      <alert
+        *ngIf="!urlControl.pristine && urlControl?.hasError('required')"
+        type="warning"
+      >
+        URL is required.
+      </alert>
+    </div>
+
+    <div class="form-group">
+      <label>Search phrase</label>
+      <input
+        type="text"
+        class="form-control"
+        [formControl]="searchPhraseControl"
+      />
+
+      <alert
+        *ngIf="
+          !searchPhraseControl.pristine &&
+          searchPhraseControl?.hasError('required')
+        "
+        type="warning"
+      >
+        Search phrase is required.
+      </alert>
+
+      <alert
+        *ngIf="
+          !searchPhraseControl.pristine &&
+          searchPhraseControl?.hasError('maxlength')
+        "
+        type="warning"
+      >
+        Search phrase length can't be more than 200 characters.
+      </alert>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!seoForm.valid">
+      Check SEO
+    </button>
+  </form>
+
+  <table *ngIf="seoInfoArray.length > 0" class="table">
+    <thead>
+      <tr>
+        <th>Position</th>
+        <th>Provider</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let seoInfo of seoInfoArray">
+        <td>
+          {{
+            seoInfo.position !== "0"
+              ? seoInfo.position
+              : "Not found from the top 100."
+          }}
+        </td>
+        <td>
+          {{ seoInfo.searchProvider }}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
